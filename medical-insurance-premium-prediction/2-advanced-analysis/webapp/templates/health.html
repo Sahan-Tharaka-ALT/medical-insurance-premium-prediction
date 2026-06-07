@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Health Insurance Prediction</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@600;700&display=swap" rel="stylesheet"> 
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+            <h1 class="m-0"><img class="img-fluid me-3" src="{{ url_for('static', filename='img/icon/icon-02-primary.png') }}" alt="">Insure</h1>
+        </a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto bg-light rounded pe-4 py-3 py-lg-0">
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/about" class="nav-item nav-link">About Us</a>
+                <a href="/service" class="nav-item nav-link active">Services</a>
+                <a href="/contact" class="nav-item nav-link">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <h1 class="display-4 animated slideInDown mb-4">Health Insurance</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Health Prediction</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="mb-5">
+                        <h1 class="display-6 mb-3">Why Health Insurance Matters</h1>
+                        <p class="mb-4">
+                            Health insurance is your financial safety net against unexpected medical costs. 
+                            It ensures that you and your family have access to quality healthcare without the 
+                            burden of expensive hospital bills. Whether it is for emergency surgeries or 
+                            long-term treatments, the right coverage provides peace of mind.
+                        </p>
+                        <p class="mb-4">
+                            Use our intelligent calculator below to estimate your annual premium instantly 
+                            based on your unique health profile.
+                        </p>
+                    </div>
+
+                    <div class="bg-light rounded p-4 border">
+                        <h4 class="mb-4">Get Your Premium Estimate</h4>
+                        
+                        <form id="predictionForm">
+                            <div class="row g-3">
+                                
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" name="age" id="age" placeholder="Age" required>
+                                        <label for="age">Age</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="transplants" id="transplants">
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                        <label for="transplants">Any Transplants?</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="height_input" placeholder="Height (cm)" oninput="calculateBMI()" required>
+                                        <label for="height_input">Height (cm)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="weight_input" placeholder="Weight (kg)" oninput="calculateBMI()" required>
+                                        <label for="weight_input">Weight (kg)</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="alert alert-light border text-center">
+                                        <strong>Calculated BMI: </strong> <span id="bmi_display" style="color: #0d6efd;">--</span>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="bmi" id="bmi_actual">
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" name="surgeries" id="surgeries" value="0" placeholder="Major Surgeries" required>
+                                        <label for="surgeries">No. of Major Surgeries</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="chronic" id="chronic">
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                        <label for="chronic">Any Chronic Diseases?</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="cancer" id="cancer">
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                        <label for="cancer">History of Cancer in Family?</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Predict Premium</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div id="result_box" class="mt-4 wow fadeInUp" data-wow-delay="0.3s" style="display:none;">
+                            <div class="alert alert-success text-center">
+                                <h3 id="result_text">Calculating...</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="position-relative rounded overflow-hidden h-100" style="min-height: 400px;">
+                        <img class="position-absolute w-100 h-100" src="{{ url_for('static', filename='img/feature.jpg') }}" alt="" style="object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="text-white mb-4"><img class="img-fluid me-3" src="{{ url_for('static', filename='img/icon/icon-02-light.png') }}" alt="">Insure</h1>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="/about">About Us</a>
+                    <a class="btn btn-link" href="/contact">Contact Us</a>
+                    <a class="btn btn-link" href="/service">Our Services</a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Insure</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/wow/wow.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/easing/easing.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/counterup/counterup.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        // 1. BMI Calculation
+        function calculateBMI() {
+            var h = document.getElementById('height_input').value;
+            var w = document.getElementById('weight_input').value;
+
+            if(h > 0 && w > 0){
+                var h_m = h / 100;
+                var bmi = w / (h_m * h_m);
+                document.getElementById('bmi_display').innerText = bmi.toFixed(2);
+                document.getElementById('bmi_actual').value = bmi.toFixed(4);
+            }
+        }
+
+        // 2. Handle Prediction without Reloading
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop page reload
+
+            var formData = new FormData(this);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultBox = document.getElementById('result_box');
+                var resultText = document.getElementById('result_text');
+                
+                resultText.innerText = data.prediction_text;
+                resultBox.style.display = 'block'; // Show the box
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
