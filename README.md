@@ -18,3 +18,5 @@ A machine learning project that predicts medical insurance premiums based on pat
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run: `python app.py`
 4. Open your browser at `http://localhost:5000`
+## Demo
+▶️ [Watch Demo Video](https://drive.google.com/file/d/1v83zOAGpp6uIgt4QN1WJgKQhyahLBZNe/view?usp=sharing)
